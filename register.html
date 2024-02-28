@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Page</title>
+  <link rel="stylesheet" href="styles.css"> <!-- You can link your CSS file here for styling -->
+</head>
+<body>
+  <div class="register-container">
+    <h2>Register</h2>
+    <form action="#" method="post">
+      <div class="input-group">
+        <label for="email">Name:</label>
+        <input type="name" id="name" name="name" required>
+      </div>
+      <div class="input-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+          event.preventDefault(); // Prevent form submission
+    
+          var email = document.getElementById("email").value;
+          var password = document.getElementById("password").value;
+    
+          fetch("https://auth/register/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Failed to register");
+            }
+            alert("Registration successful. Please login.");
+            // Redirect to Login page
+            window.location.href = "login.html";
+          })
+          .catch(error => {
+            console.error("Error:", error);
+            // Handle error (e.g., display error message)
+          });
+        });
+      </script>
+    </body>
+    </html>
+</html>
